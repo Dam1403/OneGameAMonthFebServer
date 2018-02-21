@@ -1,3 +1,3 @@
 ﻿  InitialD_Server.cpp
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\initiald_server.cpp(30): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\initiald_server.cpp(99): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   InitialD_Server.vcxproj -> C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe
