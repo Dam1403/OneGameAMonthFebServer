@@ -1,3 +1,8 @@
-﻿  InitialD_Server.cpp
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\initiald_server.cpp(99): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  InitialD_Server.vcxproj -> C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe
+﻿  CircleBuff.cpp
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\circlebuff.cpp(89): warning C4312: 'type cast': conversion from 'const int' to 'PVOID' of greater size
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\circlebuff.cpp(59): warning C4715: 'write': not all control paths return a value
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\circlebuff.cpp(97): warning C4715: 'read': not all control paths return a value
+Dispatcher.obj : error LNK2005: "int read_loc" (?read_loc@@3HA) already defined in CircleBuff.obj
+CircleBuff.obj : error LNK2019: unresolved external symbol WaitOnAddress referenced in function "int __cdecl read(void *,int)" (?read@@YAHPEAXH@Z)
+Dispatcher.obj : error LNK2001: unresolved external symbol WaitOnAddress
+C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe : fatal error LNK1120: 1 unresolved externals

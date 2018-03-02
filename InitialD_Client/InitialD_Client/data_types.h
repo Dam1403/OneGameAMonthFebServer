@@ -1,3 +1,5 @@
+//CLIENT!!!!
+
 #pragma once
 #define LOCATE_SERVER 1001
 
@@ -8,6 +10,8 @@ typedef struct PacketHeader {
 	unsigned short action;
 	unsigned short data_len;
 };
+
+
 typedef struct LocateServer {
 	char name[32];
 }LocateServer;
