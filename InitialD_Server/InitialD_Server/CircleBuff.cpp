@@ -15,33 +15,26 @@ bool full = false;
 const int DOGGIES_WHOA = -1;
 
 
-void circle_buff_init(int size, int step);
-int write(char* data, int len);
-void increment_write();
-int read(_Out_ void* dst, int dst_len);
-void increment_read();
-void circle_buff_close();
-
 
 
 
 void circle_buff_init(int size,int step)
 {
 	
-	CircleBuffer = (char*)malloc(size);
+	CircleBuffer = (char*)malloc(size * step);
 	if (!CircleBuffer) 
 	{
 		printf("CircleBuff Init Failure");
 		exit(EXIT_FAILURE);
 	}
-
+	buff_step = step;
 	write_loc, read_loc = 0;
 
 
 
 }
 
-int write(char* data, int len)
+int cb_write(char* data, int len)
 {
 	if (len > buff_step)
 	{
@@ -52,8 +45,9 @@ int write(char* data, int len)
 	//get read_loc
 	if (full) increment_read();//for smooth overwrites
 	
-	memcpy((void*)CircleBuffer[write_loc],(void*)data,len);
+	memcpy((void*)&CircleBuffer[write_loc],(void*)data,len);
 	increment_write();
+	WakeByAddressSingle((PVOID)&write_loc);
 	//release read lock
 
 }
@@ -73,7 +67,7 @@ void increment_write()
 }
 
 
-int read(_Out_ void* dst, int dst_len) 
+int cb_read(_Out_ void* dst, int dst_len)
 {
 
 	if (dst_len > buff_step)
@@ -90,7 +84,7 @@ int read(_Out_ void* dst, int dst_len)
 	}
 
 
-	memcpy((void*)dst, (void*)CircleBuffer[read_loc], dst_len);
+	memcpy((void*)dst, (void*)&CircleBuffer[read_loc], dst_len);
 	increment_read();
 	//release read lock
 

@@ -10,9 +10,6 @@
 
 
 char INPacketBuffer[MAX_PACKET_LENGTH * INBUFF_COUNT];
-volatile int write_addr = 0;
-const int DOGGIES_WHOA = -1;
-int read_loc = 0;
 
 
 
@@ -27,8 +24,6 @@ void doghouse()
 {
 	while (true)
 	{
-		WaitOnAddress(&write_addr,(PVOID)&DOGGIES_WHOA, sizeof(int),INFINITE);
-
 	}
 }
 
