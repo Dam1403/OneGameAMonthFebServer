@@ -2,7 +2,7 @@
 
 
 
-HANDLE rw_lock;
+std::mutex rw_mutex;
 char* CircleBuffer;
 int buff_step;
 int circle_buff_len;
@@ -11,7 +11,7 @@ volatile int write_loc = 0;
 int read_loc = 0;
 bool full = false;
 
-
+FILE* fp;
 const int DOGGIES_WHOA = -1;
 
 
@@ -29,9 +29,8 @@ void circle_buff_init(int size,int step)
 	}
 	buff_step = step;
 	write_loc, read_loc = 0;
-
-
-
+	fopen_s(&fp,"Logs.txt","w");
+	fflush(fp);
 }
 
 int cb_write(char* data, int len)
@@ -43,11 +42,14 @@ int cb_write(char* data, int len)
 	}
 
 	//get read_loc
+	rw_mutex.lock();
 	if (full) increment_read();//for smooth overwrites
 	
 	memcpy((void*)&CircleBuffer[write_loc],(void*)data,len);
-	increment_write();
 	WakeByAddressSingle((PVOID)&write_loc);
+	fprintf(fp,"Wrote %i\n",*((int*)&CircleBuffer[write_loc]));
+	increment_write();
+	rw_mutex.unlock();
 	//release read lock
 
 }
@@ -57,8 +59,9 @@ int cb_write(char* data, int len)
 void increment_write()
 {
 	write_loc += buff_step;
-
 	if (write_loc == circle_buff_len) write_loc = 0;
+
+	if (full)  read_loc = write_loc;
 
 	if (write_loc == read_loc) {
 		full = true;
@@ -77,15 +80,21 @@ int cb_read(_Out_ void* dst, int dst_len)
 	}
 
 	//get read_loc
+	rw_mutex.lock();
 	if (read_loc == write_loc && !full)
 	{
 		//release read lock
-		WaitOnAddress(&write_loc,(PVOID)DOGGIES_WHOA,sizeof(int),INFINITE);
+		rw_mutex.unlock();
+		int curr_value = write_loc;
+		WaitOnAddress(&write_loc,(PVOID)&write_loc,sizeof(int),INFINITE);
+		rw_mutex.lock();
 	}
 
 
 	memcpy((void*)dst, (void*)&CircleBuffer[read_loc], dst_len);
 	increment_read();
+	fprintf(fp, "Read %i\n", *((int*)dst));
+	rw_mutex.unlock();
 	//release read lock
 
 }
