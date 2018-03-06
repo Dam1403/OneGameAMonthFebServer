@@ -20,8 +20,8 @@ const int DOGGIES_WHOA = -1;
 
 void circle_buff_init(int size,int step)
 {
-	
-	CircleBuffer = (char*)malloc(size * step);
+	circle_buff_len = size * step;
+	CircleBuffer = (char*)malloc(circle_buff_len);
 	if (!CircleBuffer) 
 	{
 		printf("CircleBuff Init Failure");
