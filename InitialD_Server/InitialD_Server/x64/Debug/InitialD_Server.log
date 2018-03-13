@@ -1,4 +1,16 @@
-﻿  InitialD_Server.cpp
-x:\github\onegameamonthfebserver\initiald_server\initiald_server\initiald_server.cpp(141): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-x:\github\onegameamonthfebserver\initiald_server\initiald_server\initiald_server.cpp(171): warning C4715: 'broadcast': not all control paths return a value
-  InitialD_Server.vcxproj -> X:\GIthub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe
+﻿  ServerSockets.cpp
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(10): error C2365: 'broadcast': redefinition; previous definition was 'function'
+  c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.h(11): note: see declaration of 'broadcast'
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(44): error C2659: '=': function as left operand
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(45): error C2446: '==': no conversion from 'SOCKET' to 'int (__cdecl *)(char *,int)'
+  c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(45): note: Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or function-style cast
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(49): error C2664: 'int setsockopt(SOCKET,int,int,const char *,int)': cannot convert argument 1 from 'int (__cdecl *)(char *,int)' to 'SOCKET'
+  c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(49): note: There is no context in which this conversion is possible
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(84): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(101): error C2065: 'broadcast_socket': undeclared identifier
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(118): error C2065: 'bufflen': undeclared identifier
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(118): error C2065: 'in_buff': undeclared identifier
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(118): error C2065: 'MAX_IN_SIZE': undeclared identifier
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(118): error C2065: 'si_other': undeclared identifier
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(118): error C2065: 'in_datalen': undeclared identifier

@@ -27,6 +27,9 @@
     <ClInclude Include="CircleBuff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ServerSockets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CircleBuff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSockets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

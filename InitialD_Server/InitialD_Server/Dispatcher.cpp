@@ -7,13 +7,15 @@
 // Circle array
 // if writer* == reader* no read
 // 1024 blocks
+//SOCKET RETURNS HOW MUCH WAS READ. 
+//WRITE DATALENGTH INTO PACKET ON RECIEPT
 
 
-char INPacketBuffer[MAX_PACKET_LENGTH * INBUFF_COUNT];
+SOCKET in = INVALID_SOCKET;
+char INPacketBuffer[MAX_PACKET_LENGTH];
 
 
-
-HANDLE doggies[DOGGIE_COUNT];
+std::thread doggies[DOGGIE_COUNT];
 
 void dispatch_init()
 {
@@ -26,5 +28,6 @@ void doghouse()
 	{
 	}
 }
+
 
 void dispatcher();
