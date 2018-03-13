@@ -11,10 +11,6 @@
 //WRITE DATALENGTH INTO PACKET ON RECIEPT
 
 
-SOCKET in = INVALID_SOCKET;
-char INPacketBuffer[MAX_PACKET_LENGTH];
-
-
 std::thread doggies[DOGGIE_COUNT];
 
 void dispatch_init()

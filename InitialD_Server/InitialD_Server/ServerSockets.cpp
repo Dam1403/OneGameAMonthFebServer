@@ -38,7 +38,7 @@ bool init_server_sockets() {
 	init_in_socket();
 	init_out_socket();
 	init_broadcast_socket();
-
+	circle_buff_init(20, sizeof(InitialDPacket));
 
 	return 0;
 
@@ -55,7 +55,8 @@ bool init_broadcast_socket()
 	if (iResult == SOCKET_ERROR) {
 		cleanup_exit();
 	}
-	circle_buff_init(sizeof(InitialDPacket),);
+
+	return true;
 }
 
 bool init_out_socket()
@@ -71,6 +72,8 @@ bool init_out_socket()
 	if (iResult != 0) {
 		cleanup_exit();
 	}
+
+	return true;
 }
 
 
@@ -115,17 +118,30 @@ int broadcast(char* data, int data_len)
 }
 
 void get_datagram() {
+	sockaddr_in sa_in;
+	int in_len = sizeof(sockaddr_in);
+
+	PacketHeader* curr_head;
 
 	while (1)
 	{
 		printf("Waiting for data...");
 		fflush(stdout);
 		int recv_len = 0;
-		if ((recv_len = recvfrom(in, in_buff, sizeof(InitialDPacket), 0, (struct sockaddr *) &si_other, &in_datalen)) == SOCKET_ERROR)
+		if ((recv_len = recvfrom(in, in_buff, sizeof(InitialDPacket), 0, (struct sockaddr *) &sa_in, &in_len)) == SOCKET_ERROR)
 		{
 			printf("recvfrom() failed with error code : %d", WSAGetLastError());
 			exit(EXIT_FAILURE);
 		}
+		curr_head = (PacketHeader*)in_buff;
+		if (curr_head->data_len != sizeof(InitialDPacket) - sizeof(PacketHeader))
+		{
+			printf("Invalid Packet Recieved");
+			continue;
+		}
+		cb_write(in_buff,sizeof(InitialDPacket));
+		
+
 
 	}
 

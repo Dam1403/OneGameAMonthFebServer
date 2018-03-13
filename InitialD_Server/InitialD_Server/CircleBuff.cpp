@@ -18,9 +18,9 @@ const int DOGGIES_WHOA = -1;
 
 
 
-void circle_buff_init(int size,int step)
+void circle_buff_init(int count,int step)
 {
-	circle_buff_len = size * step;
+	circle_buff_len = count * step;
 	CircleBuffer = (char*)malloc(circle_buff_len);
 	if (!CircleBuffer) 
 	{
