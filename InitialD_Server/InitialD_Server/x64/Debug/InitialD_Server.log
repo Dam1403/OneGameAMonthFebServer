@@ -1,2 +1,17 @@
-﻿  InitialD_Server.cpp
-  InitialD_Server.vcxproj -> C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe
+﻿  stdafx.cpp
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\data_types.h(50): warning C4091: 'typedef ': ignored on left of 'PacketHeader' when no variable is declared
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\data_types.h(59): warning C4091: 'typedef ': ignored on left of 'ServerLocateResponse' when no variable is declared
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\data_types.h(64): warning C4091: 'typedef ': ignored on left of 'InitialDPacket' when no variable is declared
+  ServerSockets.cpp
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(93): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  InitialD_Server.cpp
+  dispatch_server.cpp
+  Dispatcher.cpp
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(67): error C2143: syntax error: missing ':' before ';'
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(67): error C2059: syntax error: ':'
+  CircleBuff.cpp
+  Generating Code...
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\circlebuff.cpp(94): warning C4715: 'cb_read': not all control paths return a value
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\circlebuff.cpp(55): warning C4715: 'cb_write': not all control paths return a value
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(118): warning C4715: 'broadcast': not all control paths return a value

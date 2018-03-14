@@ -54,8 +54,6 @@ int cb_write(char* data, int len)
 
 }
 
-
-
 void increment_write()
 {
 	write_loc += buff_step;
@@ -68,7 +66,6 @@ void increment_write()
 	}
 
 }
-
 
 int cb_read(_Out_ void* dst, int dst_len)
 {
@@ -89,21 +86,17 @@ int cb_read(_Out_ void* dst, int dst_len)
 		WaitOnAddress(&write_loc,(PVOID)&write_loc,sizeof(int),INFINITE);
 		rw_mutex.lock();
 	}
-
-
 	memcpy((void*)dst, (void*)&CircleBuffer[read_loc], dst_len);
 	increment_read();
 	fprintf(fp, "Read %i\n", *((int*)dst));
 	rw_mutex.unlock();
 	//release read lock
-
 }
 
 void increment_read() 
 {
 	read_loc += buff_step;
 	if (read_loc == circle_buff_len) read_loc = 0;
-
 	
 }
 void circle_buff_close() 
@@ -112,7 +105,6 @@ void circle_buff_close()
 	{
 		free(CircleBuffer);
 	}
-
 }
 
 

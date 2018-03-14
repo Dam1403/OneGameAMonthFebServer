@@ -1,15 +1,24 @@
 //SERVER!!!
 
 #pragma once
-#define ACTION_DIE 1
-#define ACTION_SPAWN 2
-#define ACTION_POSITION 3
-#define ACTION_DAMAGE 4
-#define ACTION_PROJECTILE_SPAWN 5
-#define ACTION_PROJECTILE_DESPAWN 6
-#define ACTION_PROJECTILE_POSITION 7
-#define ACTION_PROJECTILE_DAMAGE 8
+#define INITIALD_NO_OPERATION 0
 
+
+#define INITIALD_ACTION_DIE 1
+#define DACTION_SPAWN 2
+#define DACTION_POSITION 3
+#define DACTION_DAMAGE 4
+#define DACTION_PROJECTILE_SPAWN 5
+#define DACTION_PROJECTILE_DESPAWN 6
+#define DACTION_PROJECTILE_POSITION 7
+#define DACTION_PROJECTILE_DAMAGE 8
+
+
+#define INITIALD_SERVER_LOCATE 16;
+#define INITIALD_SERVER_JOIN 17;
+#define INITIALD_SERVER_LEAVE 18;
+#define INITIALD_SERVER_LIST 19;
+#define INITIALD_SERVER_MEMBER_INFO 20;
 
 
 
@@ -22,7 +31,7 @@
 
 #define MAX_PACKET_LENGTH 1024
 #define INBUFF_COUNT 48
-#define DOGGIE_COUNT 1
+
 
 //Make these bitable able for speed. 
 
@@ -38,18 +47,31 @@ typedef struct PacketHeader {
 	char vers1[7] = "0.0.1a";
 	unsigned short action;
 	unsigned short data_len;
-};
+	sockaddr_in sender;
+}PacketHeader;
 
-typedef struct LocateServer {
+typedef struct ServerLocate {
 	char name[32];
 }LocateServer;
+
+typedef struct ServerLocateResponse
+{
+	unsigned long uid;
+} ServerLocateResponse;
 
 
 typedef struct InitialDPacket {
 	char data[MAX_PACKET_LENGTH];
+} InitialDPacket;
+
+
+typedef struct InitialDPacketIn
+{
+	InitialDPacket packet;
+	sockaddr_in sender;
 };
 //24 bytes
-typedef struct {
+typedef struct SixDof{
 	float pos_x;
 	float pos_y;
 	float pos_z;

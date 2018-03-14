@@ -21,13 +21,16 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="data_types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CircleBuff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ServerSockets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -45,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ServerSockets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dispatch_server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,6 +21,10 @@ addrinfo *results;
 
 
 
+InitialDPacket initiald_pack_out;
+PacketHeader* initiald_pack_head = (PacketHeader*)&initiald_pack_out;
+void* initiald_pack_data = (&initiald_pack_out) + sizeof(PacketHeader);
+int initiald_size_nohead = sizeof(InitialDPacket) - sizeof(PacketHeader);
 
 bool init_server_sockets() {
 
@@ -38,7 +42,7 @@ bool init_server_sockets() {
 	init_in_socket();
 	init_out_socket();
 	init_broadcast_socket();
-	circle_buff_init(20, sizeof(InitialDPacket));
+	circle_buff_init(20, sizeof(InitialDPacketIn));
 
 	return 0;
 
@@ -118,17 +122,18 @@ int broadcast(char* data, int data_len)
 }
 
 void get_datagram() {
-	sockaddr_in sa_in;
-	int in_len = sizeof(sockaddr_in);
+
 
 	PacketHeader* curr_head;
+	InitialDPacketIn pack_in;
+	int in_len = sizeof(sockaddr_in);
 
 	while (1)
 	{
 		printf("Waiting for data...");
 		fflush(stdout);
 		int recv_len = 0;
-		if ((recv_len = recvfrom(in, in_buff, sizeof(InitialDPacket), 0, (struct sockaddr *) &sa_in, &in_len)) == SOCKET_ERROR)
+		if ((recv_len = recvfrom(in, (char*)&pack_in, sizeof(InitialDPacketIn), 0, (sockaddr *)&pack_in.sender, &in_len)) == SOCKET_ERROR)
 		{
 			printf("recvfrom() failed with error code : %d", WSAGetLastError());
 			exit(EXIT_FAILURE);
@@ -139,18 +144,21 @@ void get_datagram() {
 			printf("Invalid Packet Recieved");
 			continue;
 		}
-		cb_write(in_buff,sizeof(InitialDPacket));
-		
 
+		// You were here
+		cb_write((char*)&pack_in,sizeof(InitialDPacketIn));
 
 	}
 
 }
-
-int send_out(char* buff, int bufflen, struct sockaddr* out_addr, int out_datalen)
+int initiald_send_packet(int action,void* action_struct,int struct_len,sockaddr_in inaddr)
 {
+	initiald_pack_head->action = action;
+	initiald_pack_head->data_len = struct_len;
+	memcpy_s(initiald_pack_data,initiald_size_nohead,action_struct,struct_len);
+
 	//now reply the client with the same data
-	if (sendto(out, buff, bufflen, 0, out_addr, out_datalen) == SOCKET_ERROR)
+	if (sendto(out, (char*)&initiald_pack_out, sizeof(InitialDPacket), 0, (sockaddr*)&inaddr, sizeof(sockaddr_in)) == SOCKET_ERROR)
 	{
 		printf("sendto() failed with error code : %d", WSAGetLastError());
 		exit(EXIT_FAILURE);
@@ -162,5 +170,4 @@ void cleanup_exit() {
 	printf("Failed. Error Code : %d", WSAGetLastError());
 	WSACleanup();
 	exit(EXIT_FAILURE);
-
 }
