@@ -10,4 +10,4 @@ void cleanup_exit();
 void get_datagram();
 int broadcast(char* data, int data_len);
 int send_out(char* buff, int bufflen, struct sockaddr* out_addr, int out_datalen);
-int initiald_send_packet(int action, void* action_struct, int struct_len);
+int initiald_send_packet(int action, void* action_struct, int struct_len, sockaddr_in inaddr);

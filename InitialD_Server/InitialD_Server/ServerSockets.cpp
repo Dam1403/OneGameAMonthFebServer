@@ -65,7 +65,7 @@ bool init_broadcast_socket()
 
 bool init_out_socket()
 {
-	int iResult = getaddrinfo("0.0.0.0", "13338", &hints, &results);
+	size_t iResult = getaddrinfo("0.0.0.0", "13338", &hints, &results);
 
 	if (iResult != 0) {
 		cleanup_exit();
@@ -83,7 +83,7 @@ bool init_out_socket()
 
 bool init_in_socket()
 {
-	int iResult = getaddrinfo(NULL, LISTEN_PORT, &hints, &results);
+	size_t iResult = getaddrinfo(NULL, LISTEN_PORT, &hints, &results);
 
 	if (iResult != 0) {
 		cleanup_exit();
@@ -157,7 +157,7 @@ int initiald_send_packet(int action,void* action_struct,int struct_len,sockaddr_
 	initiald_pack_head->data_len = struct_len;
 	memcpy_s(initiald_pack_data,initiald_size_nohead,action_struct,struct_len);
 
-	//now reply the client with the same data
+
 	if (sendto(out, (char*)&initiald_pack_out, sizeof(InitialDPacket), 0, (sockaddr*)&inaddr, sizeof(sockaddr_in)) == SOCKET_ERROR)
 	{
 		printf("sendto() failed with error code : %d", WSAGetLastError());

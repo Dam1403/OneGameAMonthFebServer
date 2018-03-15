@@ -51,6 +51,7 @@ int cb_write(char* data, int len)
 	increment_write();
 	rw_mutex.unlock();
 	//release read lock
+	return len;
 
 }
 
@@ -64,6 +65,7 @@ void increment_write()
 	if (write_loc == read_loc) {
 		full = true;
 	}
+
 
 }
 
@@ -88,8 +90,8 @@ int cb_read(_Out_ void* dst, int dst_len)
 	}
 	memcpy((void*)dst, (void*)&CircleBuffer[read_loc], dst_len);
 	increment_read();
-	fprintf(fp, "Read %i\n", *((int*)dst));
 	rw_mutex.unlock();
+	return buff_step;
 	//release read lock
 }
 

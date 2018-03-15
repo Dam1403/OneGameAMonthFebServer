@@ -2,14 +2,13 @@
 
 bool initiald_server_locate(InitialDPacketIn* packet)
 {
-	sockaddr_in* inaddr = &packet->sender;
-	ServerLocate* locate_in = (ServerLocate*)&(packet->packet.data[sizeof(PacketHeader)]);//better way to do this....
-	
-	InitialDPacket pack_out; 
-	ServerLocateResponse* response = (ServerLocate*)&pack_out;
+	sockaddr_in inaddr = packet->sender;
+	ServerLocate* locate_in = (ServerLocate*)(&packet->packet + sizeof(PacketHeader));
+
+	ServerLocateResponse response;
 	response.uid = get_next_id();
 
-	send_out()
+	return initiald_send_packet(INITIALD_SERVER_LOCATE,(void*)&response, sizeof(response),inaddr);
 }
 bool initiald_server_join(InitialDPacketIn* packet)
 {

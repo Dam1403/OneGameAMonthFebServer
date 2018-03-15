@@ -14,11 +14,11 @@
 #define DACTION_PROJECTILE_DAMAGE 8
 
 
-#define INITIALD_SERVER_LOCATE 16;
-#define INITIALD_SERVER_JOIN 17;
-#define INITIALD_SERVER_LEAVE 18;
-#define INITIALD_SERVER_LIST 19;
-#define INITIALD_SERVER_MEMBER_INFO 20;
+#define INITIALD_SERVER_LOCATE 16
+#define INITIALD_SERVER_JOIN 17
+#define INITIALD_SERVER_LEAVE 18
+#define INITIALD_SERVER_LIST 19
+#define INITIALD_SERVER_MEMBER_INFO 20
 
 
 
@@ -69,7 +69,7 @@ typedef struct InitialDPacketIn
 {
 	InitialDPacket packet;
 	sockaddr_in sender;
-};
+}InitialDPacketIn;
 //24 bytes
 typedef struct SixDof{
 	float pos_x;

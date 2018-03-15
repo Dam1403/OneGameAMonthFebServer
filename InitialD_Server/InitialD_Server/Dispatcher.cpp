@@ -61,22 +61,20 @@ void dispatch_close()
 bool deal_with(InitialDPacketIn* packet)
 {
 	PacketHeader* header = (PacketHeader*)packet;
-	switch (header->action) 
+	switch (header->action)
 	{
-	case INITIALD_NO_OPERATION:
+		case INITIALD_NO_OPERATION:
 			return true;
-
-	case INITIALD_SERVER_LOCATE:
-		return initiald_server_locate(packet);
+		
+		case INITIALD_SERVER_LOCATE:
+			return initiald_server_locate(packet);
 	}
 }
 
 
-bool dispatch_packet(void* data, int data_len) 
-{
 
-}
 int get_next_id()
 {
 	id_base += rand();//no one cares about overflow :D
+	return id_base;
 }

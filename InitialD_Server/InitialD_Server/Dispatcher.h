@@ -3,7 +3,7 @@
 void dispatch_init();
 void fetch();
 void dispatch_close();
-bool deal_with(InitialDPacket* packet);
+bool deal_with(InitialDPacketIn* packet);
 int get_next_id();
 
 
