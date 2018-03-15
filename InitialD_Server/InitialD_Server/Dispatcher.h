@@ -1,12 +1,13 @@
 #pragma once
 
-void dispatch_init();
-void fetch();
+void init_dispatch();
+void fetch(int tagid);
 void dispatch_close();
 bool deal_with(InitialDPacketIn* packet);
 int get_next_id();
+void strip_newlines(char* victim, int vic_len);
 
-
+//dispatch_server.cpp!!!
 bool initiald_server_locate(InitialDPacketIn* packet);
 bool initiald_server_join(InitialDPacketIn* packet);
 bool initiald_server_leave(InitialDPacketIn* packet);

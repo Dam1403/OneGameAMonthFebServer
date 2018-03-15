@@ -1,12 +1,2 @@
-﻿  stdafx.cpp
-  dispatch_server.cpp
-  ServerSockets.cpp
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(97): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  InitialD_Server.cpp
-  Dispatcher.cpp
-  CircleBuff.cpp
-  Generating Code...
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(72): warning C4715: 'deal_with': not all control paths return a value
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(122): warning C4715: 'broadcast': not all control paths return a value
+﻿  dispatch_server.cpp
   InitialD_Server.vcxproj -> C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe

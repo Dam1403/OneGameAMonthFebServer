@@ -1,8 +1,8 @@
 
 #include "stdafx.h"
 
-#define LISTEN_PORT  "13337"
-#define BROADCAST_PORT "13338"
+#define BROADCAST_PORT  "13337"
+#define LISTEN_PORT "13338"
 
 
 SOCKET in = INVALID_SOCKET;
@@ -23,7 +23,7 @@ addrinfo *results;
 
 InitialDPacket initiald_pack_out;
 PacketHeader* initiald_pack_head = (PacketHeader*)&initiald_pack_out;
-void* initiald_pack_data = (&initiald_pack_out) + sizeof(PacketHeader);
+void* initiald_pack_data = (&initiald_pack_out.data[0]) + sizeof(PacketHeader);
 int initiald_size_nohead = sizeof(InitialDPacket) - sizeof(PacketHeader);
 
 bool init_server_sockets() {
@@ -42,8 +42,6 @@ bool init_server_sockets() {
 	init_in_socket();
 	init_out_socket();
 	init_broadcast_socket();
-	circle_buff_init(20, sizeof(InitialDPacketIn));
-
 	return 0;
 
 }
@@ -65,7 +63,7 @@ bool init_broadcast_socket()
 
 bool init_out_socket()
 {
-	size_t iResult = getaddrinfo("0.0.0.0", "13338", &hints, &results);
+	size_t iResult = getaddrinfo("0.0.0.0", BROADCAST_PORT, &hints, &results);
 
 	if (iResult != 0) {
 		cleanup_exit();
@@ -107,7 +105,7 @@ int broadcast(char* data, int data_len)
 	sockaddr_in sender;
 
 	sender.sin_family = AF_INET;
-	sender.sin_port = htons(13338);
+	sender.sin_port = std::atoi(BROADCAST_PORT);
 	sender.sin_addr.S_un.S_addr = INADDR_BROADCAST;
 
 	int socklen = sizeof(sockaddr_in);
@@ -127,22 +125,16 @@ void get_datagram() {
 	PacketHeader* curr_head;
 	InitialDPacketIn pack_in;
 	int in_len = sizeof(sockaddr_in);
-
+	printf("Waiting for data...\n");
+	fflush(stdout);
 	while (1)
 	{
-		printf("Waiting for data...");
-		fflush(stdout);
+
 		int recv_len = 0;
-		if ((recv_len = recvfrom(in, (char*)&pack_in, sizeof(InitialDPacketIn), 0, (sockaddr *)&pack_in.sender, &in_len)) == SOCKET_ERROR)
+		if ((recv_len = recvfrom(in, (char*)&pack_in.packet, sizeof(InitialDPacket), 0, (sockaddr *)&pack_in.sender, &in_len)) == SOCKET_ERROR)
 		{
 			printf("recvfrom() failed with error code : %d", WSAGetLastError());
 			exit(EXIT_FAILURE);
-		}
-		curr_head = (PacketHeader*)in_buff;
-		if (curr_head->data_len != sizeof(InitialDPacket) - sizeof(PacketHeader))
-		{
-			printf("Invalid Packet Recieved");
-			continue;
 		}
 
 		// You were here

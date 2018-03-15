@@ -18,7 +18,7 @@ const int DOGGIES_WHOA = -1;
 
 
 
-void circle_buff_init(int count,int step)
+void init_circle_buff(int count,int step)
 {
 	circle_buff_len = count * step;
 	CircleBuffer = (char*)malloc(circle_buff_len);
@@ -80,11 +80,10 @@ int cb_read(_Out_ void* dst, int dst_len)
 
 	//get read_loc
 	rw_mutex.lock();
-	if (read_loc == write_loc && !full)
+	while (read_loc == write_loc && !full)
 	{
 		//release read lock
 		rw_mutex.unlock();
-		int curr_value = write_loc;
 		WaitOnAddress(&write_loc,(PVOID)&write_loc,sizeof(int),INFINITE);
 		rw_mutex.lock();
 	}

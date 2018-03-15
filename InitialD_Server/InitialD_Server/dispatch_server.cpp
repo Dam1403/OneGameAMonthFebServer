@@ -3,11 +3,13 @@
 bool initiald_server_locate(InitialDPacketIn* packet)
 {
 	sockaddr_in inaddr = packet->sender;
-	ServerLocate* locate_in = (ServerLocate*)(&packet->packet + sizeof(PacketHeader));
+	ServerLocate* locate_in = (ServerLocate*)((&packet->packet.data[0]) + sizeof(PacketHeader));
+	strip_newlines(locate_in->name, sizeof(locate_in->name));
+	char ipstr[32] = {0};
+	printf("Recieved SERVER_LOCATE from: %s at ip_address %s\n", locate_in->name, inet_ntop(AF_INET,&inaddr.sin_addr,ipstr,32));
 
 	ServerLocateResponse response;
 	response.uid = get_next_id();
-
 	return initiald_send_packet(INITIALD_SERVER_LOCATE,(void*)&response, sizeof(response),inaddr);
 }
 bool initiald_server_join(InitialDPacketIn* packet)

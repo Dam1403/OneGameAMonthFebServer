@@ -14,24 +14,33 @@
 
 
 
-std::thread* doggies;
-int num_doggies = 0;
+std::thread doggies[32];
+unsigned int num_doggies = 0;
 bool closing = false;
 unsigned long id_base = 0;
+unsigned int INITIALD_MAX_THREADS = 32;
 
 
-void dispatch_init()
+
+void init_dispatch()
 {
+	unsigned int conc = std::thread::hardware_concurrency() - 1;
+	num_doggies = INITIALD_MAX_THREADS > conc ? conc : INITIALD_MAX_THREADS;
 
-	num_doggies = std::thread::hardware_concurrency();
-	doggies = (std::thread *)malloc(num_doggies * sizeof(std::thread));
 	id_base = rand()*0x20004;//RAND_MAX * 0x20004 = max_int
+	init_circle_buff(20, sizeof(InitialDPacketIn));
+	for (int i = 0; i < num_doggies; i++)
+	{
+		doggies[i] = std::thread(fetch, i+1);
+	}
 
 }
 
-void fetch() 
+void fetch(int tagid) 
 {
 	InitialDPacketIn in_pac;
+	int dog_tag = tagid;
+	printf("Dog%i: %s", tagid, "Woof!!!\n");
 	while (!closing)
 	{
 		cb_read((void*)&in_pac,sizeof(InitialDPacketIn));
@@ -55,7 +64,6 @@ void dispatch_close()
 		doggies[i].join();
 	}
 	circle_buff_close();
-	free(doggies);
 }
 
 bool deal_with(InitialDPacketIn* packet)
@@ -71,7 +79,24 @@ bool deal_with(InitialDPacketIn* packet)
 	}
 }
 
+void strip_newlines(char* victim, int vic_len)
+{
+	for (int i = 0; i < vic_len; i++)
+	{
+		switch (victim[i])
+		{
+		case '\n':
+			victim[i] = '\0';
+			break;
 
+		case '\r':
+			victim[i] = '\0';
+			break;
+
+
+		}
+	}
+}
 
 int get_next_id()
 {
