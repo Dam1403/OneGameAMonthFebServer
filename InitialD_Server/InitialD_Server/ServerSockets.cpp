@@ -129,29 +129,19 @@ int broadcast(char* data, int data_len)
 	}
 }
 
-void get_datagram() {
+void get_datagram(_Out_ InitialDPacketIn* pack_in) {
 
 
-	PacketHeader* curr_head;
-	InitialDPacketIn pack_in;
 	int in_len = sizeof(sockaddr_in);
-	
-	printf("Waiting for data...\n");
 	fflush(stdout);
-	while (1)
+
+	int recv_len = 0;
+	if ((recv_len = recvfrom(in, (char*)&pack_in->packet, sizeof(InitialDPacket), 0, (sockaddr *)&pack_in->sender, &in_len)) == SOCKET_ERROR)
 	{
-	
-		int recv_len = 0;
-		if ((recv_len = recvfrom(in, (char*)&pack_in.packet, sizeof(InitialDPacket), 0, (sockaddr *)&pack_in.sender, &in_len)) == SOCKET_ERROR)
-		{
-			printf("recvfrom() failed with error code : %d", WSAGetLastError());
-			exit(EXIT_FAILURE);
-		}
-
-		// You were here
-		cb_write((char*)&pack_in,sizeof(InitialDPacketIn));
-
+		printf("recvfrom() failed with error code : %d", WSAGetLastError());
+		exit(EXIT_FAILURE);
 	}
+		
 
 }
 int initiald_send_packet(int action,void* action_struct,int struct_len,sockaddr_in inaddr)

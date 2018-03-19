@@ -24,15 +24,17 @@ unsigned int INITIALD_MAX_THREADS = 32;
 
 void init_dispatch()
 {
-	unsigned int conc = std::thread::hardware_concurrency() - 1;
+	unsigned int conc = std::thread::hardware_concurrency();
 	num_doggies = INITIALD_MAX_THREADS > conc ? conc : INITIALD_MAX_THREADS;
 
 	id_base = rand()*0x20004;//RAND_MAX * 0x20004 = max_int
 	init_circle_buff(20, sizeof(InitialDPacketIn));
 	for (int i = 0; i < num_doggies; i++)
 	{
-		doggies[i] = std::thread(fetch, i+1);
+		doggies[i] = std::thread(fetch, i + 1);
 	}
+	doggies[0].join();//Hold main thread hostage.
+	//main thread can console command??
 
 }
 
@@ -43,8 +45,9 @@ void fetch(int tagid)
 	printf("Dog%i: %s", tagid, "Woof!!!\n");
 	while (!closing)
 	{
-		cb_read((void*)&in_pac,sizeof(InitialDPacketIn));
+		get_datagram(&in_pac);
 		deal_with(&in_pac);
+		
 	}
 }
 
