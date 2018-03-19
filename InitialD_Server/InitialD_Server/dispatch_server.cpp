@@ -10,6 +10,7 @@ bool initiald_server_locate(InitialDPacketIn* packet)
 
 	ServerLocateResponse response;
 	response.uid = get_next_id();
+	printf("Responding %lu\n", response.uid);
 	return initiald_send_packet(INITIALD_SERVER_LOCATE,(void*)&response, sizeof(response),inaddr);
 }
 bool initiald_server_join(InitialDPacketIn* packet)

@@ -47,8 +47,9 @@ typedef struct PacketHeader {
 	char vers1[7] = "0.0.1a";
 	unsigned short action;
 	unsigned short data_len;
-	sockaddr_in sender;
 }PacketHeader;
+
+
 
 typedef struct ServerLocate {
 	char name[32];

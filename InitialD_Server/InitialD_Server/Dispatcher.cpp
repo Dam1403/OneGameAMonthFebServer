@@ -51,12 +51,15 @@ void fetch(int tagid)
 void dispatch_close()
 {
 	closing = true;
-	PacketHeader no_act_pac;
-	no_act_pac.action = INITIALD_NO_OPERATION;
-	no_act_pac.data_len = 0;
-
 	InitialDPacket end_pac;
-	memcpy_s((void*)&end_pac, sizeof(InitialDPacket), (void*)&no_act_pac, sizeof(PacketHeader));
+	PacketHeader* no_act_pac = (PacketHeader*)&end_pac;
+
+
+	no_act_pac->action = INITIALD_NO_OPERATION;
+	no_act_pac->data_len = 0;
+
+
+	//memcpy_s((void*)&end_pac, sizeof(InitialDPacket), (void*)&no_act_pac, sizeof(PacketHeader));
 
 	for (int i = 0; i < num_doggies;i++)
 	{

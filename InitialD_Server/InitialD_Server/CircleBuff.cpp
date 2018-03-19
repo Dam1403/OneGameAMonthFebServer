@@ -1,7 +1,6 @@
 #include "stdafx.h"
-
-
-
+//This is cool but useless. recv from can be called from multiple threads. and the os will handle the sychronization.
+//make the doggies fetch directly from the socket.
 std::mutex rw_mutex;
 char* CircleBuffer;
 int buff_step;

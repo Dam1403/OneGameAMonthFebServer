@@ -20,14 +20,24 @@ addrinfo *results;
 
 
 
-
 InitialDPacket initiald_pack_out;
 PacketHeader* initiald_pack_head = (PacketHeader*)&initiald_pack_out;
 void* initiald_pack_data = (&initiald_pack_out.data[0]) + sizeof(PacketHeader);
 int initiald_size_nohead = sizeof(InitialDPacket) - sizeof(PacketHeader);
 
 bool init_server_sockets() {
+	PacketHeader ph_schema;
 
+	strncpy_s(
+		initiald_pack_head->protocol,
+		sizeof(initiald_pack_head->protocol),
+		ph_schema.protocol,
+		sizeof(ph_schema.protocol));
+	strncpy_s(
+		initiald_pack_head->vers1, 
+		sizeof(initiald_pack_head->vers1), 
+		ph_schema.vers1, 
+		sizeof(ph_schema.vers1));
 
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 	{
@@ -125,11 +135,12 @@ void get_datagram() {
 	PacketHeader* curr_head;
 	InitialDPacketIn pack_in;
 	int in_len = sizeof(sockaddr_in);
+	
 	printf("Waiting for data...\n");
 	fflush(stdout);
 	while (1)
 	{
-
+	
 		int recv_len = 0;
 		if ((recv_len = recvfrom(in, (char*)&pack_in.packet, sizeof(InitialDPacket), 0, (sockaddr *)&pack_in.sender, &in_len)) == SOCKET_ERROR)
 		{
@@ -145,8 +156,9 @@ void get_datagram() {
 }
 int initiald_send_packet(int action,void* action_struct,int struct_len,sockaddr_in inaddr)
 {
-	initiald_pack_head->action = action;
+	initiald_pack_head->action = action;//HEADERS MISSING!!!
 	initiald_pack_head->data_len = struct_len;
+
 	memcpy_s(initiald_pack_data,initiald_size_nohead,action_struct,struct_len);
 
 
