@@ -27,8 +27,8 @@ void init_dispatch()
 	unsigned int conc = std::thread::hardware_concurrency();
 	num_doggies = INITIALD_MAX_THREADS > conc ? conc : INITIALD_MAX_THREADS;
 	srand(get_seed());
-	id_base = rand()*0x20004;//RAND_MAX * 0x20004 = max_int
-	init_circle_buff(20, sizeof(InitialDPacketIn));
+	id_base = rand() * rand() + rand();//RAND_MAX * 0x1FFFF = about max_int
+	//init_circle_buff(20, sizeof(InitialDPacketIn));
 	for (int i = 0; i < num_doggies; i++)
 	{
 		doggies[i] = std::thread(fetch, i + 1);
@@ -41,14 +41,7 @@ void init_dispatch()
 
 unsigned long get_seed() 
 {
-	int* random = (int*)malloc(sizeof(int) * 16000);
-	unsigned long result = 0;
-	for (int i = 0; i < 16000; i++)
-	{
-		result += random[i];
-	}
-	free(random);
-	return result;
+	return time(0);//Pull this from random.org. This makes id's guessable
 }
 void fetch(int tagid) 
 {
@@ -57,6 +50,7 @@ void fetch(int tagid)
 	printf("Dog%i: %s", tagid, "Woof!!!\n");
 	while (!closing)
 	{
+		printf("Dog%i: %s", tagid, "Barks!!!\n");
 		get_datagram(&in_pac);
 		deal_with(&in_pac);
 		

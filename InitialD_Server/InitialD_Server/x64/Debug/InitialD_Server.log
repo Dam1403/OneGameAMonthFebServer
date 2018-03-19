@@ -1,5 +1,6 @@
 ﻿  Dispatcher.cpp
 c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(32): warning C4018: '<': signed/unsigned mismatch
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(79): warning C4018: '<': signed/unsigned mismatch
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(98): warning C4715: 'deal_with': not all control paths return a value
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(44): warning C4244: 'return': conversion from 'time_t' to 'unsigned long', possible loss of data
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(73): warning C4018: '<': signed/unsigned mismatch
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(92): warning C4715: 'deal_with': not all control paths return a value
   InitialD_Server.vcxproj -> C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe
