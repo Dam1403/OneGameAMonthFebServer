@@ -6,6 +6,9 @@ void dispatch_close();
 bool deal_with(InitialDPacketIn* packet);
 int get_next_id();
 void strip_newlines(char* victim, int vic_len);
+unsigned long get_seed();
+
+
 
 //dispatch_server.cpp!!!
 bool initiald_server_locate(InitialDPacketIn* packet);
