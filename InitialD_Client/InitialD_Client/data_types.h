@@ -35,12 +35,12 @@
 
 //Make these bitable able for speed. 
 
-
+#define INITIALD_MAX_SERVER_NAME_LENGTH 32
 //UDP 
 
 //PlayerStats
 
-
+char server_name[INITIALD_MAX_SERVER_NAME_LENGTH] = "InitialDServer1";
 
 typedef struct PacketHeader {
 	char protocol[9] = "InitialD";
@@ -55,7 +55,7 @@ typedef struct ServerLocate {
 
 typedef struct ServerLocateResponse
 {
-	unsigned long uid;
+	char server_name[32];
 } ServerLocateResponse;
 
 

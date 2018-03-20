@@ -33,13 +33,12 @@
 #define INBUFF_COUNT 48
 
 
-//Make these bitable able for speed. 
+#define INITIALD_MAX_SERVER_NAME_LENGTH 32
 
 
 //UDP 
 
 //PlayerStats
-
 
 
 typedef struct PacketHeader {
@@ -53,11 +52,12 @@ typedef struct PacketHeader {
 
 typedef struct ServerLocate {
 	char name[32];
+
 }LocateServer;
 
 typedef struct ServerLocateResponse
 {
-	unsigned long uid;
+	char server_name[32];
 } ServerLocateResponse;
 
 

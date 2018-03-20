@@ -1,5 +1,8 @@
 #include "stdafx.h" 
 
+char server_name[INITIALD_MAX_SERVER_NAME_LENGTH] = "InitialDServer1";
+
+
 bool initiald_server_locate(InitialDPacketIn* packet)
 {
 	sockaddr_in inaddr = packet->sender;
@@ -9,8 +12,14 @@ bool initiald_server_locate(InitialDPacketIn* packet)
 	printf("Recieved SERVER_LOCATE from: %s at ip_address %s\n", locate_in->name, inet_ntop(AF_INET,&inaddr.sin_addr,ipstr,32));
 
 	ServerLocateResponse response;
-	response.uid = get_next_id();
-	printf("Responding %lu\n", response.uid);
+	memcpy_s(
+		&response.server_name,
+		INITIALD_MAX_SERVER_NAME_LENGTH,
+		&server_name,
+		INITIALD_MAX_SERVER_NAME_LENGTH);
+
+	printf("Responding %s\n", response.server_name);
+
 	return initiald_send_packet(INITIALD_SERVER_LOCATE,(void*)&response, sizeof(response),inaddr);
 }
 bool initiald_server_join(InitialDPacketIn* packet)
