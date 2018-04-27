@@ -1,4 +1,6 @@
 ﻿  stdafx.cpp
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\data_types.h(76): warning C4091: 'typedef ': ignored on left of 'ServerList' when no variable is declared
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\data_types.h(81): warning C4091: 'typedef ': ignored on left of 'ServerListResponse' when no variable is declared
   dispatch_server.cpp
   ServerSockets.cpp
 c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(83): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
@@ -6,10 +8,10 @@ c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\
   InitialD_Server.cpp
   Dispatcher.cpp
 c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(33): warning C4018: '<': signed/unsigned mismatch
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(45): warning C4244: 'return': conversion from 'time_t' to 'unsigned long', possible loss of data
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(74): warning C4018: '<': signed/unsigned mismatch
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(44): warning C4244: 'return': conversion from 'time_t' to 'unsigned long', possible loss of data
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(72): warning C4018: '<': signed/unsigned mismatch
   CircleBuff.cpp
   Generating Code...
-c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(93): warning C4715: 'deal_with': not all control paths return a value
+c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\dispatcher.cpp(91): warning C4715: 'deal_with': not all control paths return a value
 c:\users\dougl\onedrive\documents\github\onegameamonthfebserver\initiald_server\initiald_server\serversockets.cpp(130): warning C4715: 'broadcast': not all control paths return a value
   InitialD_Server.vcxproj -> C:\Users\dougl\OneDrive\Documents\GitHub\OneGameAMonthFebServer\InitialD_Server\x64\Debug\InitialD_Server.exe

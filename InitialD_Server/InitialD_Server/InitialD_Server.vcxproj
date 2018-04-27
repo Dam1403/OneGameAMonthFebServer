@@ -151,6 +151,7 @@
     <ClInclude Include="CircleBuff.h" />
     <ClInclude Include="data_types.h" />
     <ClInclude Include="Dispatcher.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="ServerSockets.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

@@ -29,7 +29,7 @@ void init_dispatch()
 	num_doggies = INITIALD_MAX_THREADS > conc ? conc : INITIALD_MAX_THREADS;
 	srand(get_seed());
 	id_base = rand() * rand() + rand();//RAND_MAX * 0x1FFFF = about max_int
-	//init_circle_buff(20, sizeof(InitialDPacketIn));
+
 	for (int i = 0; i < num_doggies; i++)
 	{
 		doggies[i] = std::thread(fetch, i + 1);
@@ -39,11 +39,11 @@ void init_dispatch()
 
 }
 
-
 unsigned long get_seed() 
 {
 	return time(0);//Pull this from random.org. This makes id's guessable
 }
+
 void fetch(int tagid) 
 {
 	InitialDPacketIn in_pac;
@@ -63,8 +63,6 @@ void dispatch_close()
 	closing = true;
 	InitialDPacket end_pac;
 	PacketHeader* no_act_pac = (PacketHeader*)&end_pac;
-
-
 	no_act_pac->action = INITIALD_NO_OPERATION;
 	no_act_pac->data_len = 0;
 

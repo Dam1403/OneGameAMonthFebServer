@@ -34,7 +34,7 @@
 
 
 #define INITIALD_MAX_SERVER_NAME_LENGTH 32
-
+#define INITIALD_MAX_USER_NAME_LENGTH 32
 
 //UDP 
 
@@ -51,14 +51,34 @@ typedef struct PacketHeader {
 
 
 typedef struct ServerLocate {
-	char name[32];
-
+	char name[INITIALD_MAX_USER_NAME_LENGTH];
 }LocateServer;
 
 typedef struct ServerLocateResponse
 {
-	char server_name[32];
+	char server_name[INITIALD_MAX_SERVER_NAME_LENGTH];
 } ServerLocateResponse;
+
+
+//HANDLE DUPLICATES
+typedef struct ServerJoin {
+	char username[INITIALD_MAX_USER_NAME_LENGTH];
+}ServerJoin;
+
+typedef struct ServerJoinResponse
+{
+	unsigned long uid;
+}ServerJoinResponse;
+
+typedef struct ServerList
+{
+	unsigned long uid;
+};
+typedef struct ServerListResponse
+{
+	char names[MAX_PACKET_LENGTH/INITIALD_MAX_USER_NAME_LENGTH][INITIALD_MAX_USER_NAME_LENGTH];
+	//NEXT????
+};
 
 
 typedef struct InitialDPacket {
@@ -103,6 +123,8 @@ typedef struct{
 	int id;
 	SixDof location;
 } Projectile;
+
+
 
 
 
